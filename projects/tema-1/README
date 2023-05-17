@@ -1,0 +1,46 @@
+Timp de implementare: o saptamana, mai mult dupa deadline-ul soft.
+
+Acum partea interesanta, sa povestesc prin ce lupte am trecut cu aceasta tema. O sa o iau in ordinea implementarii:
+
+# Feribot
+## Parere? o scumpica
+- o cautare binara decenta
+- a fost prima problema lucrata in C++ in ultimii cativa ani, se vede ca am ramas pe scanf/printf
+- singura problema intampinata a fost ca nu m-am obisnuit cu ideea de numere mari, dar s-a rezolvat cu un int64_t
+## Complexitate? O(N * log(Gtot))
+
+# BadGPT
+## Parere? am auzit ca e usoara, dar mi-a mancat zilele
+- am facut pe foaie cateva modalitati de a amesteca n si u, si am descoperit ca am nevoie de Fibonacci, dar nu oricum ci si pe numere mari si si rapid
+- duminica, cand am trimis o varianta slaba a temei mele, am pus un fibonacci slab care cauza TLE-uri, l-am pus doar pentru cateva puncte bonus
+- https://www.nayuki.io/page/fast-fibonacci-algorithms#:~:text=Definition%3A%20The%20Fibonacci%20sequence%20is,of%20algorithms%20to%20do%20so. am vazut aici metode de fibonacci si am zis ca nu ma amestec cu matrici. Pe atunci nu stiam ce ma asteapta la sushi..
+- cu ce scrisesem eu pe metoda fast doubling am stat mult si bine, imi lipseau "1ULL *", pusesem "% Mod" peste tot, de control, dar nu a fost de ajuns.
+## Complexitate? O(N)
+
+# Nostory
+## Parere? (pe 20%)
+- am facut doar primul task avand in vedere "nelimitatele mutari" => solutie simpla
+- am sortat descrescator un vector format din a si b concatenate
+si am luat prima jumatate, adica numerele cele mai mari si le-am calculat suma
+++ parere buna despre C++ in general ca am apucat sa mai lucrez cu functiile date de ei
+- la 2 nu m-am apucat ca m-am gandit ca poate e un Greedy greu si am zis pass
+## Complexitate? O(N * log(N))
+
+# Sushi
+## Parere? Nu mai mananc sushi.
+- in teorie a fost usor pentru ca am folosit tiparul problemei rucsacului, dar unii vectori i-am luat de la 1, altii de la 0, m-am incurcat in i-uri
+- am stat o ora buna sa vad de unde imi dau diferente de, spre exemplu, 1002 vs 1003. Era de la un > care trebuia sa fie >=...
+- de la task-ul doi ma incurcasem cu extended knapsack problem, cu matricea 3d. Imi dadeau 2 teste din 5, poate la noroc. Asa ca m-am intors la abordarea de la task-ul 1, doar ca am facut dublu produselor, adica vector dublu de note si vector dublu de preturi, ca si cum ar fi platouri total diferite.
+- ma gandeam ca tot ce sa fac la task-ul 2 e sa apelez task-ul 1 cu alte date, dar am zis ca poate nu punctati asa ca am copiat de sus mare parte
+- si dupa ce m-am chinuit initial cu nebunia de matrice 3D, ma gandeam ca de ea am nevoie la task-ul 3, am incercat ceva, ma incurcam in debbuging, asa ca am scos-o.
+## Complexitate? O(N * M * X)
+
+# Semnale
+## Parere? Mai ok la mate
+- cum am ajuns la formula:
+-> pentru fiecare secvență de 0-uri de lungime k, putem adauga maxim (k+1) secvențe de 1 înaintea și după, sa ramana in conditiile cerintei, pentru X biti de 0 și Y biti de 1, vom avea X+1 spații în care putem insera secvențe de 1-uri => combinari de (x + 1) luate cate y
+- incepusem prin a face functii pentru factorial si pentru formula combinarii, dar manca si timp, si nu mergea pentru numere mari, asa ca am facut formula combinarii in urma simplificarii. Am luat separat si am calculat ce ramane sus, respectiv ce ramane jos, dar iar, pentru numere mari sa fac o impartire? Urat. 
+- am aplicat algoritmul lui Euclid pentru numitor
+- sa nu uitam de "1ULL *"  si "% mod"
+- task-ul 2 am cautat sa il fac tot cu matematica, din cauza lipsei timpului ramas, dar nu mi-a iesit asa ca l-am scos
+## Complexitate? O(Y * log(M))
