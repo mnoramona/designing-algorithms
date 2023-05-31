@@ -1,0 +1,53 @@
+Data de inceput: 25.05
+Data in care s-a implementat cel mai mult: 28.05
+
+# Implementarea codului Supercomputer:
+- pentru rezolvarea problemei am folosit o abordare topologica a grafului de dependente al task-urilor
+- inainte de a incepe cititrea datelor de intrare, se deschid fisierele de intrare si de iesire cu ajutorul functiei 'freopen', ca ma gandeam ca e mai rapid si ajuta cu TLE-urile.
+- citesc numarul de task-uri si numarul de dependente, 
+- citesc datele pentru fiecare task: setul de date cerut('set_date[i]') care reprezinta setul de date cerut de taskul 'i'.
+- citesc dependentele dintre task-uri: in vectorul 'v' memorez task-urile care depind de un anumit task, si actualizez si vectorul 'grd_itrn' care memoreaza numarul de dependente al fiecarui task.
+- creez un vector 'ordine' care memoreaza ordinea in care se vor executa task-urile,
+- adaugarea in vectorul de ordine se face in felul urmator: se cauta task-ul cu numarul de dependente 0, se adauga in vectorul de ordine, se scad numarul de dependente ale task-urilor care depind de el, si se repeta procedeul pana cand nu mai exista task-uri cu numar de dependente 0.
+- dupa obtinerea ordinei de executie, se parcurge vectorul de ordine si se calculeaza numarul minim de switch-uri necesare pentru a executa task-ul curent.
+- pentru fiecare task care depinde de task-ul curent, se verifică setul de date cerut de ambele task-uri. Dacă acestea sunt diferite, înseamnă că trebuie realizat un switch și se actualizează vectorul de switches cu valoarea maximă între switches[current], switches[ordine[i]] + 1
+- in caz contrar, se actualizează switches[current] cu valoarea maximă între switches[current] și switches[ordine[i]].
+- la final, se calculează numărul minim de switch-uri, parcurgând vectorul switches și actualizând min_switches cu valoarea maximă între min_switches și switches[i].
+
+### Complexitatea algoritmului:
+- O(N + M), unde N = numărul de task-uri și M = numărul de dependențe dintre acestea.
+
+### Probleme intampinate:
+- calculam numarul de switches in timp ce updatam vectorul de switches, si nu dupa ce il updatam, ceea ce ducea la erori de calculare a numarului minim de switches.
+
+# Implementarea codului Magazin:
+- pentru rezolvarea problemei folosit o reprezentare a grafului de depozite folosind un vector de liste de adiacenta si o functie DFS recursiva
+- functia DFS primeste un depozit de plecare si numarul de expedieri consecutive, daca numarul de expedieri devine 0 si nu a fost gasit un depozit final pana atunci, inseamna ca depozitul curent este cel final
+- functia DFS este apelata pentru fiecare intrebare si afiseaza depozitul final gasit
+
+### Complexitatea algoritmului:
+- O(N), unde N = numărul de depozite.
+
+### Probleme intampinate:
+- in primul rand, a fost greu sa determin raspunsul corect cu aceasta implementare, ca eu cand apelam recursiv DFS-ul il apelam cu E - 1 care nu se modifica bine, acolo si aparitia lui "&"
+- in al doilea rand am incercat sa pastrez un drum pe care am putea sa il faca un colet prin tot graful, dar mergea doar daca coletul pleca din primul nod, nu am reusit sa adaptez metoda asta si pentru alte noduri de plecare, asa ca am ramas la metoda asta, care nu e cea mai eficienta, dar merge.
+
+# Implementarea codului Ferate:
+- pentru rezolvarea acestei probleme am aplicat algoritmul lui Tarjan pentru gasirea componentelor tare conexe intr-un graf orientat
+- partea grea din acest cod a fost sa gasesc o metoda sa determin gradul intern pentru fiecare componenta conexa, de aceea am adaugat in Tarjan salvarea componentelor conexe
+- am parcurs fiecare muchie si am verificat daca cele doua noduri se afla in componente conexe diferite, daca da, am crescut gradul intern al componentei conexe din care facea parte nodul de destinatie al muchiei
+- am numarat cate componente conexe au gradul intern 0 si am verificat daca din acestea facea parte si componenta care continea nodul de start, astfel afisam numarul de componente cu grad intern 0 pe care trebui sa le leg, sau acest numar minus 1 daca componenta care continea nodul de start avea grad intern 0
+
+### Complexitatea algoritmului:
+- O(N + M + numSCC * N)
+
+### Probleme intampinate:
+- v-am mentionat, cea mai mare problema sa determin gradul intern, ba imi da dea doar 0, ba calculam gradul extern, am incercat lista de adiacenta inversa etc.
+
+# Implementarea codului Teleportare:
+- aici folosesc algoritmul lui Dijkstra pentru a găsi cel mai scurt drum între două noduri într-un graf
+- am initializat distantele cu o valoare foarte mare ca sa le actualizez mai tarziu
+- am adaugat codul asta pentru a impusca niste puncte pentru ca sunt la limita in situatia mea 
+
+### Complexitatea algoritmului:
+- O(N + M)
